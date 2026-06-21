@@ -1,0 +1,67 @@
+## 1. Problem Framing (Rural Credit Scoring కోసం)
+
+ఇది synthetic data కాబట్టి, నేను దాన్ని realistic గా design చేస్తాను — కేవలం random numbers కాకుండా, actual leakage traps, class imbalance, మరియు messy features ఉండేలా చూస్తాను. Entity design ఇలా ఉంటుంది:
+
+- **Borrower demographic/static features**: వయసు, gender, location (district/state), land ownership, household size, education, occupation type (farmer/laborer/small trader)
+- **Credit bureau-like features**: existing loans, repayment history, bureau score band (rural thin-file borrowers కి ఇది తరచుగా missing గా ఉంటుంది — అదే ఒక signal)
+- **Alternative data**: mobile recharge frequency/value, utility bill payments, SHG (self-help group) membership, KCC (Kisan Credit Card) usage, agri input purchase patterns, seasonal income proxy (crop cycle/harvest timing)
+- **Geospatial/contextual**: district rainfall index, crop yield index, market distance proxy, NBFC/bank branch density
+- **Loan-specific**: loan amount, tenure, purpose (crop input, equipment, consumption)
+- **Target**: N months లో default అయ్యిందా లేదా (binary), ~5-15% bad rate తో, మరియు time-based origination dates (ఇది leakage-safe design కి చాలా critical)
+
+## 2. Repo Structure
+
+```
+yogyank-scoring/
+├── data/
+│   ├── raw/                  # synthetic generated data
+│   ├── interim/
+│   └── processed/
+├── src/
+│   ├── data_generation/      # synthetic data generator
+│   ├── features/             # feature engineering, leakage-safe transforms
+│   ├── validation/           # train/test/OOT splitting logic
+│   ├── training/             # model training, hyperparam search
+│   ├── explainability/       # SHAP, stability reports
+│   ├── monitoring/           # drift, PSI, missingness checks
+│   ├── packaging/            # model artifact + schema + metadata bundling
+│   └── api/                  # FastAPI scoring service
+├── pipelines/                # orchestration scripts (Make/Prefect/Airflow-lite)
+├── tests/
+├── configs/                  # YAML configs per pipeline stage
+├── mlruns/                   # MLflow tracking
+├── docker/
+├── .github/workflows/        # CI/CD
+└── docs/                     # model cards, assumptions, validation reports
+```
+
+## 3. Pipeline Stages
+
+**A. Synthetic Data Generation** — configurable bad-rate, correlated feature relationships ఉండే generator (ఉదా: bureau score తక్కువ ఉంటే default ఎక్కువ, rainfall agri-borrower risk ని affect చేయడం). ఇంకా intentional "trap" columns కూడా పెడతాను — చూడడానికి predictive గా కనిపించేవి కానీ నిజానికి leaky అయినవి (ఉదా: default అయిన తర్వాత set అయ్యే "collections_flag" — మీ leakage-safe pipeline దాన్ని పట్టుకుంటుందో లేదో test చేయడానికి).
+
+**B. Feature Engineering** — versioned, design ద్వారానే leakage-safe: ప్రతి feature computation, borrower యొక్క application date కి anchor అయ్యి ఉంటుంది, future information ఎప్పుడూ వాడదు. వీటిని scikit-learn-compatible transformers గా build చేస్తాను, అప్పుడు pipeline object లోకి clean గా serialize అవుతాయి.
+
+**C. Validation Design** — out-of-time (OOT) split ప్రధాన evaluation గా (ముందు originate అయిన loans మీద train, తర్వాత వాటిమీద test), మరియు train లోపల stratified k-fold model selection కోసం. ఇది regulated credit shops validate చేసే విధానాన్ని mirror చేస్తుంది.
+
+**D. Model Training** — XGBoost/LightGBM/CatBoost comparison, Optuna వంటి దానితో tuning, MLflow లో track చేయడం (params, metrics — AUC, KS, Gini, PR-AUC imbalance దృష్ట్యా — మరియు artifacts).
+
+**E. Packaging** — preprocessing pipeline + model + feature schema + metadata (training date, data version, validation metrics, intended use, known limitations) అన్నీ కలిపి ఒకే versioned artifact గా, MLflow Model Registry లో register చేయడం.
+
+**F. Explainability** — global SHAP summary, ఒక్కో prediction కి SHAP (credit లో adverse action/reason codes కోసం అవసరం), retrains మధ్య top features stability check.
+
+**G. Monitoring** — drift కోసం PSI/CSI, missingness tracking, segment-level performance (region/loan purpose వారీగా), basic fairness slicing.
+
+**H. Serving** — packaged artifact load చేసే FastAPI app, `/score` endpoint, Pydantic schema validation, score + top reason codes return చేయడం.
+
+**I. CI/CD** — GitHub Actions: PR మీద lint/test, retrain-and-validate gate, Docker image build/push.
+
+## 4. Suggested Build Order
+
+1. Synthetic data generator (leakage traps తో)
+2. Leakage-safe feature pipeline + OOT validation harness
+3. Training + MLflow tracking
+4. Packaging + registry
+5. Explainability module
+6. FastAPI serving + Docker
+7. Monitoring module
+8. CI/CD + docs/model card?

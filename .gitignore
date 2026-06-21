@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Virtual Environment
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ML Artifacts
+mlruns/
+mlartifacts/
+data/raw/
+data/interim/
+data/processed/
+models/*
+!models/v1.0/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Installer
+python-*.exe
+
+# Logs
+*.log
+
+# Lock file (generated, not committed)
+requirements.lock

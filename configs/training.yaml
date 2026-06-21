@@ -1,0 +1,28 @@
+# Training Configuration
+# =======================
+
+models:
+  - xgboost
+  - lightgbm
+  # CatBoost intentionally excluded — no stable Python 3.12 wheels
+
+optuna:
+  n_trials: 50
+  direction: maximize
+  metric: roc_auc
+  timeout_seconds: 600  # 10 minutes max per model
+
+evaluation_metrics:
+  - roc_auc
+  - ks_statistic
+  - gini
+  - pr_auc
+  - log_loss
+
+mlflow:
+  experiment_name: "yogyank-scoring"
+  tracking_uri: "./mlruns"
+
+# Class imbalance handling
+# XGBoost: scale_pos_weight = n_neg / n_pos (~9.0 for 10% bad rate)
+# LightGBM: is_unbalance = true

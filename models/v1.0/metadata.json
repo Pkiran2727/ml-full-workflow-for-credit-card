@@ -1,0 +1,37 @@
+{
+  "model_name": "yogyank-credit-scorer",
+  "version": "v1.0",
+  "training_date": "2026-06-20T21:41:57.451920",
+  "python_version": "3.12",
+  "model_type": "XGBClassifier",
+  "train_metrics": {
+    "roc_auc": 0.8430361962890248,
+    "ks_statistic": 0.5212591613530636,
+    "gini": 0.6860723925780496,
+    "pr_auc": 0.39345230306817647,
+    "log_loss": 0.509885311126709,
+    "recall_positive": 0.799248523886205,
+    "n_total": 18760,
+    "n_positive": 1863,
+    "n_negative": 16897,
+    "bad_rate": 0.09930703624733475
+  },
+  "oot_metrics": {
+    "roc_auc": 0.8025572754671962,
+    "ks_statistic": 0.45677424994627513,
+    "gini": 0.6051145509343925,
+    "pr_auc": 0.32093931569384543,
+    "log_loss": 0.5237779021263123,
+    "recall_positive": 0.7378335949764521,
+    "n_total": 6240,
+    "n_positive": 637,
+    "n_negative": 5603,
+    "bad_rate": 0.10208333333333333
+  },
+  "intended_use": "Rural credit scoring for Indian borrowers \u00e2\u20ac\u201d microfinance and priority sector lending",
+  "known_limitations": [
+    "Trained on synthetic data \u00e2\u20ac\u201d requires retraining on real borrower data before production use",
+    "Bureau features have high missingness by design (thin-file population)",
+    "Geospatial features are proxy-based, not actual GPS/satellite data"
+  ]
+}

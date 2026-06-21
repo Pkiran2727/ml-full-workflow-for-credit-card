@@ -1,0 +1,536 @@
+{
+  "generated_at": "2026-06-20T21:42:10.550956",
+  "csi": [
+    {
+      "feature": "seasonal_income_proxy",
+      "psi": 0.003751128948609127,
+      "status": "stable"
+    },
+    {
+      "feature": "market_distance_km",
+      "psi": 0.0035846766698230267,
+      "status": "stable"
+    },
+    {
+      "feature": "bank_branch_density",
+      "psi": 0.00301573840833691,
+      "status": "stable"
+    },
+    {
+      "feature": "crop_yield_index",
+      "psi": 0.0029116800472466175,
+      "status": "stable"
+    },
+    {
+      "feature": "district",
+      "psi": 0.002769349572403632,
+      "status": "stable"
+    },
+    {
+      "feature": "age",
+      "psi": 0.0027169306543062366,
+      "status": "stable"
+    },
+    {
+      "feature": "district_rainfall_index",
+      "psi": 0.0025641837681954632,
+      "status": "stable"
+    },
+    {
+      "feature": "kcc_usage_months",
+      "psi": 0.0022879364369564983,
+      "status": "stable"
+    },
+    {
+      "feature": "utility_bill_payment_score",
+      "psi": 0.002194783275982134,
+      "status": "stable"
+    },
+    {
+      "feature": "land_acres",
+      "psi": 0.0021855468804659714,
+      "status": "stable"
+    },
+    {
+      "feature": "loan_amount",
+      "psi": 0.0021747994361208003,
+      "status": "stable"
+    },
+    {
+      "feature": "loan_purpose",
+      "psi": 0.0019799657985353834,
+      "status": "stable"
+    },
+    {
+      "feature": "household_size",
+      "psi": 0.0019502656469928517,
+      "status": "stable"
+    },
+    {
+      "feature": "mobile_recharge_freq",
+      "psi": 0.001855451633248929,
+      "status": "stable"
+    },
+    {
+      "feature": "mobile_recharge_value",
+      "psi": 0.0017249775739228911,
+      "status": "stable"
+    },
+    {
+      "feature": "education_level",
+      "psi": 0.0016027147401500698,
+      "status": "stable"
+    },
+    {
+      "feature": "shg_membership",
+      "psi": 0.0013990174132922925,
+      "status": "stable"
+    },
+    {
+      "feature": "repayment_history_score",
+      "psi": 0.0013896616759399765,
+      "status": "stable"
+    },
+    {
+      "feature": "tenure_months",
+      "psi": 0.0012363895745093555,
+      "status": "stable"
+    },
+    {
+      "feature": "rainfall_x_farmer",
+      "psi": 0.0012335484618683549,
+      "status": "stable"
+    },
+    {
+      "feature": "bureau_score_band",
+      "psi": 0.0012167473001512344,
+      "status": "stable"
+    },
+    {
+      "feature": "state",
+      "psi": 0.0007597979693933515,
+      "status": "stable"
+    },
+    {
+      "feature": "occupation_type",
+      "psi": 0.0006346341882519174,
+      "status": "stable"
+    },
+    {
+      "feature": "existing_loan_count",
+      "psi": 0.0005266594448849333,
+      "status": "stable"
+    },
+    {
+      "feature": "agri_input_purchases",
+      "psi": 0.00024196825185785742,
+      "status": "stable"
+    },
+    {
+      "feature": "bureau_x_loans",
+      "psi": 0.00016194878414821227,
+      "status": "stable"
+    },
+    {
+      "feature": "gender",
+      "psi": 0.00010803555097800696,
+      "status": "stable"
+    },
+    {
+      "feature": "is_farmer",
+      "psi": 1.2022505615592368e-05,
+      "status": "stable"
+    },
+    {
+      "feature": "bureau_score_band_is_missing",
+      "psi": 6.624386844510114e-06,
+      "status": "stable"
+    },
+    {
+      "feature": "repayment_history_score_is_missing",
+      "psi": 6.624386844510114e-06,
+      "status": "stable"
+    }
+  ],
+  "overall_psi_summary": {
+    "n_stable": 30,
+    "n_moderate_shift": 0,
+    "n_significant_shift": 0
+  },
+  "missingness_drift": [
+    {
+      "feature": "age",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "gender",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "state",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "district",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "land_acres",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "household_size",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "education_level",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "occupation_type",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "existing_loan_count",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "repayment_history_score",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "bureau_score_band",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "mobile_recharge_freq",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "mobile_recharge_value",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "utility_bill_payment_score",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "shg_membership",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "kcc_usage_months",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "agri_input_purchases",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "seasonal_income_proxy",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "district_rainfall_index",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "crop_yield_index",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "market_distance_km",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "bank_branch_density",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "loan_amount",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "tenure_months",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "loan_purpose",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "bureau_score_band_is_missing",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "repayment_history_score_is_missing",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "is_farmer",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "rainfall_x_farmer",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    },
+    {
+      "feature": "bureau_x_loans",
+      "train_missing_rate": 0.0,
+      "scoring_missing_rate": 0.0,
+      "delta": 0.0,
+      "flagged": false
+    }
+  ],
+  "segment_performance": {
+    "state": [
+      {
+        "state": "Andhra Pradesh",
+        "count": 629,
+        "bad_rate": 0.097,
+        "auc": 0.7879,
+        "ks": 0.4691
+      },
+      {
+        "state": "Bihar",
+        "count": 628,
+        "bad_rate": 0.0844,
+        "auc": 0.8298,
+        "ks": 0.5478
+      },
+      {
+        "state": "Karnataka",
+        "count": 586,
+        "bad_rate": 0.1007,
+        "auc": 0.8171,
+        "ks": 0.5403
+      },
+      {
+        "state": "Madhya Pradesh",
+        "count": 648,
+        "bad_rate": 0.088,
+        "auc": 0.827,
+        "ks": 0.5435
+      },
+      {
+        "state": "Maharashtra",
+        "count": 611,
+        "bad_rate": 0.108,
+        "auc": 0.7902,
+        "ks": 0.47
+      },
+      {
+        "state": "Odisha",
+        "count": 623,
+        "bad_rate": 0.1156,
+        "auc": 0.826,
+        "ks": 0.52
+      },
+      {
+        "state": "Rajasthan",
+        "count": 636,
+        "bad_rate": 0.1148,
+        "auc": 0.8009,
+        "ks": 0.4725
+      },
+      {
+        "state": "Tamil Nadu",
+        "count": 627,
+        "bad_rate": 0.1069,
+        "auc": 0.7337,
+        "ks": 0.3886
+      },
+      {
+        "state": "Telangana",
+        "count": 609,
+        "bad_rate": 0.1051,
+        "auc": 0.8314,
+        "ks": 0.53
+      },
+      {
+        "state": "Uttar Pradesh",
+        "count": 643,
+        "bad_rate": 0.1011,
+        "auc": 0.7795,
+        "ks": 0.4301
+      }
+    ],
+    "loan_purpose": [
+      {
+        "loan_purpose": "consumption",
+        "count": 1271,
+        "bad_rate": 0.1023,
+        "auc": 0.8126,
+        "ks": 0.4767
+      },
+      {
+        "loan_purpose": "crop_input",
+        "count": 1279,
+        "bad_rate": 0.1016,
+        "auc": 0.7876,
+        "ks": 0.4466
+      },
+      {
+        "loan_purpose": "equipment",
+        "count": 1222,
+        "bad_rate": 0.1097,
+        "auc": 0.8002,
+        "ks": 0.4739
+      },
+      {
+        "loan_purpose": "housing",
+        "count": 1182,
+        "bad_rate": 0.1108,
+        "auc": 0.8141,
+        "ks": 0.5123
+      },
+      {
+        "loan_purpose": "livestock",
+        "count": 1286,
+        "bad_rate": 0.0871,
+        "auc": 0.7958,
+        "ks": 0.4745
+      }
+    ],
+    "occupation_type": [
+      {
+        "occupation_type": "agricultural_laborer",
+        "count": 1544,
+        "bad_rate": 0.1412,
+        "auc": 0.7825,
+        "ks": 0.4317
+      },
+      {
+        "occupation_type": "artisan",
+        "count": 620,
+        "bad_rate": 0.1435,
+        "auc": 0.7596,
+        "ks": 0.397
+      },
+      {
+        "occupation_type": "farmer",
+        "count": 2488,
+        "bad_rate": 0.0482,
+        "auc": 0.8259,
+        "ks": 0.4986
+      },
+      {
+        "occupation_type": "other",
+        "count": 617,
+        "bad_rate": 0.1199,
+        "auc": 0.7508,
+        "ks": 0.4081
+      },
+      {
+        "occupation_type": "small_trader",
+        "count": 971,
+        "bad_rate": 0.1401,
+        "auc": 0.7426,
+        "ks": 0.3807
+      }
+    ],
+    "gender": [
+      {
+        "gender": "F",
+        "count": 2801,
+        "bad_rate": 0.1035,
+        "auc": 0.8102,
+        "ks": 0.4763
+      },
+      {
+        "gender": "M",
+        "count": 3439,
+        "bad_rate": 0.1009,
+        "auc": 0.7965,
+        "ks": 0.4487
+      }
+    ]
+  }
+}

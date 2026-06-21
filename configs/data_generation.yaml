@@ -1,0 +1,29 @@
+# Synthetic Data Generation Configuration
+# =========================================
+
+n_borrowers: 25000
+bad_rate: 0.10
+missing_bureau_rate: 0.30  # thin-file rural borrowers
+
+date_range:
+  start: "2023-01-01"
+  end: "2024-12-31"  # 24-month span for OOT split
+
+leakage_traps: true  # inject post-event leakage columns for pipeline testing
+random_seed: 42
+
+# Feature distributions (parameters for realistic generation)
+demographics:
+  age_range: [18, 70]
+  gender_ratio: 0.55  # fraction male
+  states: ["Andhra Pradesh", "Telangana", "Karnataka", "Tamil Nadu", "Maharashtra",
+           "Madhya Pradesh", "Rajasthan", "Uttar Pradesh", "Bihar", "Odisha"]
+  education_levels: ["illiterate", "primary", "secondary", "higher_secondary", "graduate"]
+  occupation_types: ["farmer", "agricultural_laborer", "small_trader", "artisan", "other"]
+
+loan:
+  amount_range: [5000, 500000]
+  tenure_months: [3, 6, 12, 18, 24, 36]
+  purposes: ["crop_input", "equipment", "livestock", "consumption", "housing"]
+
+output_path: "data/raw/borrowers.csv"

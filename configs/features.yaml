@@ -1,0 +1,72 @@
+# Feature Engineering Configuration
+# ===================================
+
+target_column: "default_flag"
+date_column: "origination_date"
+id_column: "borrower_id"
+
+# HARD BLOCK — these columns must NEVER enter training
+# They are post-event leakage traps injected by the data generator
+leakage_columns:
+  - "collections_flag"
+  - "days_past_due_at_snapshot"
+  - "recovery_amount"
+
+# Also drop these (non-features)
+drop_columns:
+  - "borrower_id"
+  - "origination_date"
+  - "default_flag"
+
+numeric_features:
+  - "age"
+  - "land_acres"
+  - "household_size"
+  - "existing_loan_count"
+  - "repayment_history_score"
+  - "mobile_recharge_freq"
+  - "mobile_recharge_value"
+  - "utility_bill_payment_score"
+  - "kcc_usage_months"
+  - "agri_input_purchases"
+  - "seasonal_income_proxy"
+  - "district_rainfall_index"
+  - "crop_yield_index"
+  - "market_distance_km"
+  - "bank_branch_density"
+  - "loan_amount"
+  - "tenure_months"
+
+categorical_features:
+  - "gender"
+  - "state"
+  - "district"
+  - "education_level"
+  - "occupation_type"
+  - "loan_purpose"
+  - "shg_membership"
+  - "bureau_score_band"
+
+# Ordered categoricals (ordinal encoding)
+ordinal_features:
+  education_level: ["illiterate", "primary", "secondary", "higher_secondary", "graduate"]
+
+# High-cardinality categoricals (frequency encoding instead of one-hot)
+high_cardinality_features:
+  - "district"
+
+# Bureau features — high missingness expected (thin-file signal)
+bureau_features:
+  - "bureau_score_band"
+  - "repayment_history_score"
+
+# Domain-driven interaction features
+interactions:
+  - name: "rainfall_x_farmer"
+    features: ["district_rainfall_index", "is_farmer"]
+    operation: "multiply"
+  - name: "bureau_x_loans"
+    features: ["bureau_score_band_encoded", "existing_loan_count"]
+    operation: "multiply"
+
+output_dir: "data/processed"

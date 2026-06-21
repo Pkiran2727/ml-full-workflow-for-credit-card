@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yogyank Rural Credit Scorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #60a5fa;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+            border: 1px solid var(--card-border);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), #2563eb);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .form-section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-secondary);
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+            grid-column: 1 / -1;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group select {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--card-border);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.2s ease;
+            width: 100%;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .action-row {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .results-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .score-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-number {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .risk-very_low_risk { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .risk-low_risk { background: rgba(52, 211, 153, 0.15); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.25); }
+        .risk-medium_risk { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .risk-high_risk { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.25); }
+        .risk-very_high_risk { background: rgba(239, 68, 68, 0.3); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.5); }
+
+        .reasons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .reason-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--card-border);
+            padding: 1.25rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .reason-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .reason-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .reason-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .reason-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-decrease {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        .badge-increase {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+        }
+
+        .reason-value {
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--accent-secondary);
+        }
+
+        .placeholder-text {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.95rem;
+            padding: 3rem 1rem;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.85);
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top: 5px solid var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--card-border);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div>
+                <h1>Yogyank Credit Scorer</h1>
+                <p>AI-Powered Credit Decisioning &amp; Adverse Action Explanation System</p>
+            </div>
+            <button class="btn btn-secondary" id="btn-autofill">⚡ Autofill Sample</button>
+        </header>
+
+        <!-- INPUT FORM CARD -->
+        <div class="card" style="position: relative;">
+            <div class="loading-overlay" id="loading">
+                <div class="spinner"></div>
+            </div>
+
+            <form id="scoring-form">
+                <div class="form-grid">
+                    <!-- SECTION 1: Personal & Demographics -->
+                    <div class="form-section-title">Demographics &amp; Location</div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age (Years)</label>
+                        <input type="number" id="age" name="age" min="18" max="100" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <select id="state" name="state" required>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Karnataka">Karnataka</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district">District Code</label>
+                        <input type="text" id="district" name="district" required placeholder="e.g. T_D1">
+                    </div>
+
+                    <!-- SECTION 2: Loan & Assets -->
+                    <div class="form-section-title">Loan &amp; Asset Parameters</div>
+
+                    <div class="form-group">
+                        <label for="loan_amount">Loan Amount (INR)</label>
+                        <input type="number" id="loan_amount" name="loan_amount" min="1000" max="1000000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tenure_months">Tenure (Months)</label>
+                        <input type="number" id="tenure_months" name="tenure_months" min="1" max="120" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan_purpose">Loan Purpose</label>
+                        <select id="loan_purpose" name="loan_purpose" required>
+                            <option value="crop_input">Crop input purchase</option>
+                            <option value="equipment">Farm equipment</option>
+                            <option value="livestock">Livestock purchase</option>
+                            <option value="housing">Rural housing repair</option>
+                            <option value="consumption">General consumption</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="land_acres">Land Owned (Acres)</label>
+                        <input type="number" id="land_acres" name="land_acres" step="0.1" min="0" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="household_size">Household Size</label>
+                        <input type="number" id="household_size" name="household_size" min="1" max="20" required>
+                    </div>
+
+                    <!-- SECTION 3: Credit History -->
+                    <div class="form-section-title">Credit History</div>
+
+                    <div class="form-group">
+                        <label for="bureau_score_band">Bureau Score Band</label>
+                        <select id="bureau_score_band" name="bureau_score_band" required>
+                            <option value="high">High (Good History)</option>
+                            <option value="medium">Medium (Average History)</option>
+                            <option value="low">Low (Poor History)</option>
+                            <option value="none">No History / Thin File</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repayment_history_score">Repayment History Score (0-100)</label>
+                        <input type="number" id="repayment_history_score" name="repayment_history_score" min="0" max="100" step="0.1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="existing_loan_count">Existing Active Loans</label>
+                        <input type="number" id="existing_loan_count" name="existing_loan_count" min="0" max="10" required>
+                    </div>
+
+                    <!-- SECTION 4: Socio-Economic & Others -->
+                    <div class="form-section-title">Socio-Economic &amp; Agricultural Indicators</div>
+
+                    <div class="form-group">
+                        <label for="education_level">Education Level</label>
+                        <select id="education_level" name="education_level" required>
+                            <option value="illiterate">No formal education</option>
+                            <option value="primary">Primary</option>
+                            <option value="secondary">Secondary</option>
+                            <option value="higher_secondary">Higher Secondary</option>
+                            <option value="graduate">Graduate</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="occupation_type">Occupation Type</label>
+                        <select id="occupation_type" name="occupation_type" required>
+                            <option value="farmer">Farmer</option>
+                            <option value="agricultural_laborer">Agricultural Laborer</option>
+                            <option value="small_trader">Small Trader</option>
+                            <option value="artisan">Artisan</option>
+                            <option value="other">Other / Service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile_recharge_freq">Recharges / Month</label>
+                        <input type="number" id="mobile_recharge_freq" name="mobile_recharge_freq" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile_recharge_value">Avg Recharge Value (INR)</label>
+                        <input type="number" id="mobile_recharge_value" name="mobile_recharge_value" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="utility_bill_payment_score">Utility Bill Score (0.0 - 1.0)</label>
+                        <input type="number" id="utility_bill_payment_score" name="utility_bill_payment_score" min="0" max="1" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shg_membership">Self-Help Group (SHG)</label>
+                        <select id="shg_membership" name="shg_membership" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kcc_usage_months">Kisan Credit Card (Months active)</label>
+                        <input type="number" id="kcc_usage_months" name="kcc_usage_months" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="agri_input_purchases">Agri Input Purchases / Year</label>
+                        <input type="number" id="agri_input_purchases" name="agri_input_purchases" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seasonal_income_proxy">Seasonal Income Proxy (INR)</label>
+                        <input type="number" id="seasonal_income_proxy" name="seasonal_income_proxy" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district_rainfall_index">District Rainfall Index</label>
+                        <input type="number" id="district_rainfall_index" name="district_rainfall_index" min="0" max="2" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="crop_yield_index">Crop Yield Index (0-1)</label>
+                        <input type="number" id="crop_yield_index" name="crop_yield_index" min="0" max="1" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="market_distance_km">Distance to Market (KM)</label>
+                        <input type="number" id="market_distance_km" name="market_distance_km" min="0" max="100" step="0.1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank_branch_density">Bank Branches in 10KM</label>
+                        <input type="number" id="bank_branch_density" name="bank_branch_density" min="0" required>
+                    </div>
+
+                    <div class="action-row">
+                        <button type="submit" class="btn btn-primary" id="btn-submit">Score Borrower</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- RESULTS SIDEBAR -->
+        <div class="results-panel">
+            <div class="error-message" id="error-box"></div>
+
+            <div class="card" id="results-card" style="display: none;">
+                <div class="form-section-title" style="margin-bottom: 1rem;">Risk Assessment</div>
+                
+                <div class="score-card">
+                    <span class="risk-badge" id="risk-badge">Medium Risk</span>
+                    <div class="score-number" id="score-val">18.37%</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">Probability of Credit Default</div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <div class="info-label">Model Version</div>
+                        <div class="info-value" id="info-ver">v1.0</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">Risk Category</div>
+                        <div class="info-value" id="info-band">Medium</div>
+                    </div>
+                </div>
+
+                <div class="form-section-title" style="margin-top: 2rem; margin-bottom: 1rem;">Primary Decision Drivers (SHAP)</div>
+                <div class="reasons-list" id="reasons-container">
+                    <!-- Reasons will be rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- PLACEHOLDER FOR INITIAL STATE -->
+            <div class="card" id="results-placeholder">
+                <div class="placeholder-text">
+                    👈 Enter borrower parameters and click "Score Borrower" to view credit risk evaluation and adverse action drivers.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sampleBorrower = {
+            age: 38,
+            gender: "M",
+            state: "Telangana",
+            district: "T_D1",
+            land_acres: 2.8,
+            household_size: 5,
+            education_level: "secondary",
+            occupation_type: "farmer",
+            existing_loan_count: 1,
+            repayment_history_score: 72.5,
+            bureau_score_band: "medium",
+            mobile_recharge_freq: 9,
+            mobile_recharge_value: 250,
+            utility_bill_payment_score: 0.82,
+            shg_membership: "yes",
+            kcc_usage_months: 18,
+            agri_input_purchases: 4,
+            seasonal_income_proxy: 18000,
+            district_rainfall_index: 0.95,
+            crop_yield_index: 0.76,
+            market_distance_km: 8.5,
+            bank_branch_density: 4,
+            loan_amount: 60000,
+            tenure_months: 12,
+            loan_purpose: "crop_input"
+        };
+
+        const fieldMapping = {
+            "occupation_type": "Occupation Type",
+            "bureau_score_band": "Bureau History Band",
+            "repayment_history_score": "Repayment History Score",
+            "mobile_recharge_value": "Mobile Recharge Value",
+            "mobile_recharge_freq": "Mobile Recharge Frequency",
+            "utility_bill_payment_score": "Utility Bill Score",
+            "seasonal_income_proxy": "Seasonal Income Proxy",
+            "district_rainfall_index": "Rainfall Index",
+            "crop_yield_index": "Crop Yield Index",
+            "market_distance_km": "Market Distance",
+            "loan_amount": "Requested Loan Amount",
+            "existing_loan_count": "Active Loan Count"
+        };
+
+        // Autofill sample data
+        document.getElementById('btn-autofill').addEventListener('click', () => {
+            Object.keys(sampleBorrower).forEach(key => {
+                const el = document.getElementById(key);
+                if (el) el.value = sampleBorrower[key];
+            });
+        });
+
+        // Form submission
+        document.getElementById('scoring-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const loading = document.getElementById('loading');
+            const resultsCard = document.getElementById('results-card');
+            const placeholder = document.getElementById('results-placeholder');
+            const errorBox = document.getElementById('error-box');
+            
+            loading.style.display = 'flex';
+            errorBox.style.display = 'none';
+            
+            const formData = new FormData(e.target);
+            const payload = {};
+            
+            // Build scoring payload with correct types
+            for (let [key, val] of formData.entries()) {
+                const element = document.getElementById(key);
+                if (element.type === 'number') {
+                    payload[key] = parseFloat(val);
+                } else {
+                    payload[key] = val;
+                }
+            }
+
+            try {
+                const response = await fetch('/score', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errText = await response.text();
+                    throw new Error(errText || 'Scoring API request failed');
+                }
+
+                const result = await response.json();
+                
+                // Render score
+                document.getElementById('score-val').innerText = (result.score * 100).toFixed(2) + '%';
+                
+                // Render risk badge
+                const badge = document.getElementById('risk-badge');
+                badge.className = `risk-badge risk-${result.risk_band}`;
+                badge.innerText = result.risk_band.replace(/_/g, ' ');
+
+                // Render info grid
+                document.getElementById('info-ver').innerText = result.model_version;
+                document.getElementById('info-band').innerText = result.risk_band.split('_')[0].toUpperCase();
+
+                // Render reason codes
+                const reasonsContainer = document.getElementById('reasons-container');
+                reasonsContainer.innerHTML = '';
+                
+                if (result.reason_codes && result.reason_codes.length > 0) {
+                    result.reason_codes.forEach(code => {
+                        const card = document.createElement('div');
+                        card.className = 'reason-card';
+                        
+                        const isDecrease = code.direction === 'decreases_risk';
+                        const badgeClass = isDecrease ? 'badge-decrease' : 'badge-increase';
+                        const badgeText = isDecrease ? '↓ Decreases Risk' : '↑ Increases Risk';
+                        const displayName = fieldMapping[code.feature] || code.feature.replace(/_/g, ' ');
+
+                        card.innerHTML = `
+                            <div class="reason-info">
+                                <div class="reason-title">${displayName}</div>
+                                <div class="reason-desc">Value: <span class="reason-value">${code.feature_value}</span></div>
+                            </div>
+                            <span class="reason-badge ${badgeClass}">${badgeText}</span>
+                        `;
+                        reasonsContainer.appendChild(card);
+                    });
+                } else {
+                    reasonsContainer.innerHTML = '<div class="reason-desc">No significant risk drivers identified.</div>';
+                }
+
+                placeholder.style.display = 'none';
+                resultsCard.style.display = 'block';
+
+            } catch (err) {
+                console.error(err);
+                errorBox.innerText = `Error: ${err.message}`;
+                errorBox.style.display = 'block';
+                resultsCard.style.display = 'none';
+                placeholder.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

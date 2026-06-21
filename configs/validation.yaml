@@ -1,0 +1,16 @@
+# Validation Configuration
+# ========================
+
+# Out-of-Time (OOT) split — mirrors regulated credit shop validation
+oot_cutoff_date: "2024-07-01"  # ~6 months OOT window
+
+# Train: 2023-01 to 2024-06 (~18 months, ~75% of data)
+# OOT:   2024-07 to 2024-12 (~6 months, ~25% of data)
+# Expected OOT defaults: ~625 at 10% bad rate — statistically sound
+
+# Stratified K-Fold within training set (for model selection)
+n_folds: 5
+stratify_by: "default_flag"
+
+# Safety checks
+min_oot_defaults: 50  # warn if OOT has fewer defaults than this

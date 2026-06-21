@@ -1,0 +1,21 @@
+# Packaging Configuration
+# ========================
+
+model_name: "yogyank-credit-scorer"
+version_prefix: "v"
+
+metadata:
+  intended_use: "Rural credit scoring for Indian borrowers — microfinance and priority sector lending"
+  known_limitations:
+    - "Trained on synthetic data — requires retraining on real borrower data before production use"
+    - "Bureau features have high missingness by design (thin-file population)"
+    - "Geospatial features are proxy-based, not actual GPS/satellite data"
+  ethical_considerations:
+    - "Gender and occupation type are included — monitor for disparate impact"
+    - "Model should not be sole decision-maker — human-in-the-loop required"
+
+registry:
+  initial_stage: "Staging"  # None → Staging → Production
+
+output_dir: "models"
+model_card_path: "docs/model_card.md"
