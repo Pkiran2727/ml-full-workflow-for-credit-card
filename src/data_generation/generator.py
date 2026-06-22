@@ -13,7 +13,6 @@ Leakage Traps:
     - recovery_amount: only non-zero after default
 """
 
-import os
 import logging
 from pathlib import Path
 
@@ -238,7 +237,7 @@ def _generate_target(df: pd.DataFrame, config: dict,
     logit += rng.normal(0, 0.8, size=n)
 
     # Convert to probability via sigmoid
-    prob = 1 / (1 + np.exp(-logit))
+    # Convert to probability via sigmoid (removed unused variable)
 
     # Calibrate to target bad rate by adjusting the intercept
     # Binary search for the right intercept

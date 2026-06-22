@@ -1,7 +1,6 @@
 """Tests for synthetic data generation."""
 
 import pandas as pd
-import pytest
 from src.data_generation import generate_synthetic_data
 
 

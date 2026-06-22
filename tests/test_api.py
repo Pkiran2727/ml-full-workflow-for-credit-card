@@ -1,6 +1,5 @@
 """Tests for FastAPI scoring API."""
 
-import pytest
 from fastapi.testclient import TestClient
 
 

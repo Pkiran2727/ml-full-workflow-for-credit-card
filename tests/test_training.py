@@ -1,8 +1,6 @@
 """Tests for model training."""
 
 import numpy as np
-import pandas as pd
-import pytest
 
 from src.training.metrics import calculate_ks_statistic, calculate_gini, calculate_all_metrics
 

@@ -1,7 +1,6 @@
 """Tests for monitoring (PSI/CSI/drift)."""
 
 import numpy as np
-import pytest
 
 from src.monitoring.drift import calculate_psi
 

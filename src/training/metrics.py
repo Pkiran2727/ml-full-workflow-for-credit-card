@@ -15,10 +15,7 @@ from sklearn.metrics import (
     roc_auc_score,
     average_precision_score,
     log_loss,
-    precision_recall_curve,
     roc_curve,
-    confusion_matrix,
-    classification_report,
     recall_score,
 )
 

@@ -10,7 +10,6 @@ from entering the pipeline. It uses strict mode by default (fail loud, fail earl
 """
 
 import logging
-from typing import Optional
 
 import numpy as np
 import pandas as pd

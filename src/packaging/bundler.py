@@ -69,7 +69,7 @@ def _generate_model_card(config: dict, metrics: dict, feature_names: list[str],
 
 ## Known Limitations
 
-{chr(10).join(f'- {l}' for l in meta.get('known_limitations', []))}
+{chr(10).join(f'- {limit}' for limit in meta.get('known_limitations', []))}
 
 ## Ethical Considerations
 

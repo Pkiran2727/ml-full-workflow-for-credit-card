@@ -119,7 +119,6 @@ def stage_train(config_dir: str):
     logger.info("=" * 60)
 
     import pandas as pd
-    import numpy as np
     from src.features.pipeline import build_feature_pipeline, save_pipeline
     from src.training import train_models
     from src.packaging import package_model
@@ -214,7 +213,6 @@ def stage_monitor(config_dir: str):
     logger.info("=" * 60)
 
     import pandas as pd
-    import numpy as np
     from src.packaging import load_packaged_model
     from src.monitoring import generate_monitoring_report
 
